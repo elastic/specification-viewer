@@ -41,7 +41,7 @@ export default function TypesView() {
         <ListGroup variant="flush">
           {filteredTypes.map((type) => {
             const bt = type as BaseType;
-            return <ListGroup.Item as={NavLink} action to={ `/types/${bt.name.namespace}::${bt.name.name}` }>{ `${bt.name.namespace}::${bt.name.name}` }</ListGroup.Item>;
+            return <ListGroup.Item key={`${bt.name.namespace}::${bt.name.name}`} as={NavLink} action to={ `/types/${bt.name.namespace}::${bt.name.name}` }>{ `${bt.name.namespace}::${bt.name.name}` }</ListGroup.Item>;
           })}
         </ListGroup>
       </Container>
@@ -52,7 +52,7 @@ export default function TypesView() {
             <Type type={selectedType} />
           </>
         :
-          <p>Select a type</p>
+          <h4>← Select a type</h4>
         }
       </Container>
     </>

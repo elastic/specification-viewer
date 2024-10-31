@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { useSchema } from './SchemaContext';
 import Loading from './Loading';
-import Navbar from './Navbar';
+import NavBar from './NavBar';
 import EndpointsView from './EndpointsView';
 import TypesView from './TypesView';
 
@@ -17,7 +17,7 @@ export default function SchemaView() {
   return (
     <BrowserRouter>
       <Container fluid className="SchemaView">
-        <Navbar />
+        <NavBar />
         <Routes>
           <Route path="/" element={
             <EndpointsView />

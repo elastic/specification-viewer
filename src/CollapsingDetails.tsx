@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 
 type Props = {
@@ -9,12 +9,24 @@ type Props = {
 };
 
 export default function CollapsingDetails({ header, value, expanded, cb, children }: React.PropsWithChildren<Props>) {
-  const [body, setBody] = useState<React.ReactNode>(children);
+  const [body, setBody] = useState<React.ReactNode | undefined>(undefined);
+  const [open, setOpen] = useState<boolean>(expanded ?? false);
+
+  useEffect(() => {
+    if (cb && open) {
+      setBody(cb());
+    }
+  }, [cb, open]);
 
   const onEnter = () => {
+    setOpen(true);
     if (cb) {
       setBody(cb());
     }
+  };
+
+  const onExit = () => {
+    setOpen(false);
   };
 
   return (
@@ -25,7 +37,7 @@ export default function CollapsingDetails({ header, value, expanded, cb, childre
           {header && value && <>:&nbsp;</>}
           {value && <><span>{ value }</span></>}
         </Accordion.Header>
-        <Accordion.Body onEnter={cb ? onEnter : undefined}>{ body }</Accordion.Body>
+        <Accordion.Body onEnter={cb ? onEnter : undefined} onExit={onExit}>{ children ?? body }</Accordion.Body>
       </Accordion.Item>
     </Accordion>
   );

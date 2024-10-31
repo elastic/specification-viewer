@@ -37,7 +37,7 @@ export default function EndpointsView() {
         </FloatingLabel>
         <ListGroup variant="flush">
           {filteredEndpoints.map((endpoint) => {
-            return <ListGroup.Item as={NavLink} action to={ '/endpoints/' + endpoint.name }>{ endpoint.name }</ListGroup.Item>;
+            return <ListGroup.Item key={endpoint.name} as={NavLink} action to={ '/endpoints/' + endpoint.name }>{ endpoint.name }</ListGroup.Item>;
           })}
         </ListGroup>
       </Container>
@@ -48,7 +48,7 @@ export default function EndpointsView() {
             <Endpoint endpoint={selectedEndpoint} />
           </>
         :
-          <p>Select an endpoint</p>
+          <h4>← Select an endpoint</h4>
         }
       </Container>
     </>
