@@ -1,4 +1,3 @@
-
 import Details from './Details';
 import CollapsingDetails from './CollapsingDetails';
 import Description from './Description';
