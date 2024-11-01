@@ -1,38 +1,43 @@
 import Container from 'react-bootstrap/Container';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
-import { useSchema } from './SchemaContext';
-import Loading from './Loading';
+import LoadSchema from './LoadSchema';
 import NavBar from './NavBar';
 import EndpointsView from './EndpointsView';
 import TypesView from './TypesView';
 
 export default function SchemaView() {
-  const schema = useSchema();
-
-  if (!('endpoints' in schema)) {
-    return <Loading />
-  }
-
   return (
-    <BrowserRouter>
-      <Container fluid className="SchemaView">
-        <NavBar />
-        <Routes>
-          <Route path="/" element={
+    <Container fluid className="SchemaView">
+      <NavBar />
+      <Routes>
+        <Route path="/" element={
+          <LoadSchema />
+        } />
+        <Route path="/:schemaVersion" element={
+          <LoadSchema />
+        } />
+        <Route path="/:schemaVersion/endpoints" element={
+          <LoadSchema>
             <EndpointsView />
-          } />
-          <Route path="/endpoints/:endpoint" element={
+          </LoadSchema>
+        } />
+        <Route path="/:schemaVersion/endpoints/:endpoint" element={
+          <LoadSchema>
             <EndpointsView />
-          } />
-          <Route path="/types" element={
+          </LoadSchema>
+        } />
+        <Route path="/:schemaVersion/types" element={
+          <LoadSchema>
             <TypesView />
-          } />
-          <Route path="/types/:type" element={
+          </LoadSchema>
+        } />
+        <Route path="/:schemaVersion/types/:type" element={
+          <LoadSchema>
             <TypesView />
-          } />
-        </Routes>
-      </Container>
-    </BrowserRouter>
+          </LoadSchema>
+        } />
+      </Routes>
+    </Container>
   );
 }

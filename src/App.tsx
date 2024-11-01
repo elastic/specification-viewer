@@ -1,12 +1,16 @@
+import { BrowserRouter } from 'react-router-dom';
+
 import SchemaProvider from './SchemaContext';
 import SchemaView from './SchemaView';
 
 function App() {
   return (
     <div className="App">
-      <SchemaProvider>
-        <SchemaView />
-      </SchemaProvider>
+      <BrowserRouter>
+        <SchemaProvider>
+          <SchemaView />
+        </SchemaProvider>
+      </BrowserRouter>
     </div>
   );
 }

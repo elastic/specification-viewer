@@ -103,6 +103,7 @@ code {
 .CollapsingDetails .accordion-button:not(.collapsed) {
   background-color: inherit;
   box-shadow: inherit;
+  color: black;
 }
 
 .CollapsingDetails .accordion-button::after {

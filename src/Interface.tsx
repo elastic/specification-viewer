@@ -19,7 +19,7 @@ export default function Interface({ type }: Props) {
       {type.generics &&
         <CollapsingDetails expanded header="Generics">
           {type.generics.map(g => (
-            <CollapsingType key={`${g.namespace}::${g.name}`} header="Generic" namespace={g.namespace} name={g.name} />
+            <CollapsingType key={`${g.namespace}::${g.name}`} namespace={g.namespace} name={g.name} />
           ))}
         </CollapsingDetails>
       }

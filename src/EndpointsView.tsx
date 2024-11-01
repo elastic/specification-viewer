@@ -6,13 +6,14 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { NavLink, useParams } from 'react-router-dom';
 
-import { useSchema } from './SchemaContext';
+import { useSchema, useSchemaContext } from './SchemaContext';
 import Endpoint from './Endpoint';
 
 export default function EndpointsView() {
   const [search, setSearch] = useState('');
   const searchInput = useRef<HTMLInputElement>(null);
   const schema = useSchema();
+  const { version } = useSchemaContext();
   const { endpoint } = useParams();
 
   const searchChanged = () => {
@@ -37,7 +38,7 @@ export default function EndpointsView() {
         </FloatingLabel>
         <ListGroup variant="flush">
           {filteredEndpoints.map((endpoint) => {
-            return <ListGroup.Item key={endpoint.name} as={NavLink} action to={ '/endpoints/' + endpoint.name }>{ endpoint.name }</ListGroup.Item>;
+            return <ListGroup.Item key={endpoint.name} as={NavLink} action to={ `/${version}/endpoints/${endpoint.name}` }>{ endpoint.name }</ListGroup.Item>;
           })}
         </ListGroup>
       </Container>

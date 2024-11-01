@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-
 import { compareVersions } from 'compare-versions';
 
 import { Model } from './metamodel';
@@ -19,16 +18,8 @@ export const SchemaContext = createContext<Context | undefined>(undefined);
 
 export default function SchemaProvider({ children }: React.PropsWithChildren<{}>) {
   const [schema, setSchema] = useState<Model | {}>({});
-  const [version, setVersion] = useState<string>('main');
+  const [version, setVersion] = useState<string>('');
   const [allVersions, setAllVersions] = useState<string[]>([]);
-
-  useEffect(() => {
-    (async () => {
-      const r = await fetch(`https://raw.githubusercontent.com/elastic/elasticsearch-specification/refs/heads/${version}/output/schema/schema.json`);
-      const s = await r.json();
-      setSchema(s);
-    })();
-  }, [version]);
 
   useEffect(() => {
     (async () => {
@@ -43,6 +34,17 @@ export default function SchemaProvider({ children }: React.PropsWithChildren<{}>
       }
     })();
   }, []);
+
+  useEffect(() => {
+    if (!version) {
+      return;
+    }
+    (async () => {
+      const r = await fetch(`https://raw.githubusercontent.com/elastic/elasticsearch-specification/refs/heads/${version}/output/schema/schema.json`);
+      const s = await r.json();
+      setSchema(s);
+    })();
+  }, [version]);
 
   return (
     <SchemaContext.Provider value={{ schema, version, setVersion, allVersions }}>

@@ -6,7 +6,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { NavLink, useParams } from 'react-router-dom';
 
-import { useSchema } from './SchemaContext';
+import { useSchema, useSchemaContext } from './SchemaContext';
 import Type from './Type';
 
 import { BaseType } from './metamodel';
@@ -15,6 +15,7 @@ export default function TypesView() {
   const [search, setSearch] = useState('');
   const searchInput = useRef<HTMLInputElement>(null);
   const schema = useSchema();
+  const { version } = useSchemaContext();
   const { type } = useParams();
 
   const searchChanged = () => {
@@ -41,7 +42,7 @@ export default function TypesView() {
         <ListGroup variant="flush">
           {filteredTypes.map((type) => {
             const bt = type as BaseType;
-            return <ListGroup.Item key={`${bt.name.namespace}::${bt.name.name}`} as={NavLink} action to={ `/types/${bt.name.namespace}::${bt.name.name}` }>{ `${bt.name.namespace}::${bt.name.name}` }</ListGroup.Item>;
+            return <ListGroup.Item key={`${bt.name.namespace}::${bt.name.name}`} as={NavLink} action to={ `/${version}/types/${bt.name.namespace}::${bt.name.name}` }>{ `${bt.name.namespace}::${bt.name.name}` }</ListGroup.Item>;
           })}
         </ListGroup>
       </Container>
