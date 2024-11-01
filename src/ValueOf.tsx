@@ -8,13 +8,14 @@ import { InstanceOf, ArrayOf, UnionOf, DictionaryOf, LiteralValue } from './meta
 type Props = {
   header?: string;
   value: ValueOfType;
+  expanded?: boolean
 }
 
-export default function ValueOf({ header, value }: Props) {
+export default function ValueOf({ header, value, expanded }: Props) {
   if (value.kind === 'instance_of') {
     const v = value as InstanceOf;
     return (
-      <CollapsingDetails expanded header={header ?? "Value"} value="Instance of">
+      <CollapsingDetails expanded={expanded ?? true} header={header ?? "Value"} value="Instance of">
         <CollapsingType header="Type" namespace={v.type.namespace} name={v.type.name} />
         {v.generics &&
           <CollapsingDetails header="Generics">
@@ -29,7 +30,7 @@ export default function ValueOf({ header, value }: Props) {
   else if (value.kind === 'array_of') {
     const v = value as ArrayOf;
     return (
-      <CollapsingDetails expanded header={header ?? "Value"} value="Array of">
+      <CollapsingDetails expanded={expanded ?? true} header={header ?? "Value"} value="Array of">
         <ValueOf value={v.value} />
       </CollapsingDetails>
     );
@@ -37,7 +38,7 @@ export default function ValueOf({ header, value }: Props) {
   else if (value.kind === 'union_of') {   
     const v = value as UnionOf;
     return (
-      <CollapsingDetails expanded header={header ?? "Value"} value="Union of">
+      <CollapsingDetails expanded={expanded ?? true} header={header ?? "Value"} value="Union of">
         {v.items.map((t, i) => (
           <ValueOf key={i} value={t} />
         ))}
@@ -47,7 +48,7 @@ export default function ValueOf({ header, value }: Props) {
   else if (value.kind === 'dictionary_of') {
     const v = value as DictionaryOf;
     return (
-      <CollapsingDetails expanded header={header ?? "Value"} value="Dictionary of">
+      <CollapsingDetails expanded={expanded ?? true} header={header ?? "Value"} value="Dictionary of">
         <ValueOf header="Keys" value={v.key} />
         <ValueOf header="Values" value={v.value} />
         <Details header="Single key" value={v.singleKey ? 'Yes' : 'No'} />
@@ -62,7 +63,7 @@ export default function ValueOf({ header, value }: Props) {
   else if (value.kind === 'literal_value') {
     const v = value as LiteralValue;
     return (
-      <CollapsingDetails expanded header={header ?? "Value"} value="Literal value">
+      <CollapsingDetails expanded={expanded ?? true} header={header ?? "Value"} value="Literal value">
         <Details header="Value" value={v.value.toString()} />
       </CollapsingDetails>
     );

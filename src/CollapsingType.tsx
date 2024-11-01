@@ -26,6 +26,6 @@ export default function CollapsingType({ header, namespace, name }: Props) {
   }, [name, namespace, schema.types]);
 
   return (
-    <CollapsingDetails header={header} value=<code>{ `${namespace}::${name}` }</code> cb={renderType} />
+    <CollapsingDetails header={header} value=<code>{`${namespace}::${name}` }</code> cb={renderType} />
   );
 }

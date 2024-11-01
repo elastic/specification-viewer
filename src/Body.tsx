@@ -14,7 +14,7 @@ export default function Body({ body }: Props) {
     const v = body as ValueBody;
     return (
       <>
-        <ValueOf header="Value" value={v.value} />
+        <ValueOf expanded={false} header="Body value" value={v.value} />
         {v.codegenName && <Details header="Code generation name" value={v.codegenName} />}
       </>
     );
