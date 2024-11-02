@@ -9,6 +9,8 @@ import Request from './Request';
 import Response from './Response';
 import Enum from './Enum';
 import TypeAlias from './TypeAlias';
+import References from './References';
+
 import { useSchemaContext } from './SchemaContext';
 
 import { BaseType, Interface as InterfaceType, Request as RequestType, Response as ResponseType, Enum as EnumType, TypeAlias as TypeAliasType } from './metamodel';
@@ -20,16 +22,6 @@ type Props = {
 export default function Type({ type }: Props) {
   const { references } = useSchemaContext();
   const typeName = `${type.name.namespace}::${type.name.name}`;
-  let refCount = 0;
-
-  if (references[typeName] !== undefined) {
-    if (references[typeName].endpoints) {
-      refCount += references[typeName].endpoints.length;
-    }
-    if (references[typeName].types) {
-      refCount += references[typeName].types.length;
-    }
-  }
 
   return (
     <>
@@ -66,28 +58,7 @@ export default function Type({ type }: Props) {
             <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
           </svg>
         </a> />
-      {typeName in references && (references[typeName].endpoints || references[typeName].types) &&
-        <CollapsingDetails header="References" value={`${refCount}`}>
-          {references[typeName].endpoints &&
-            <>
-              {references[typeName].endpoints.map(endpointName => {
-                const comment = endpointName.split(' ').slice(1).join(' ');
-                const name = endpointName.split(' ')[0];
-                return <CollapsingEndpoint key={name} header={comment} name={name} />;
-              })}
-            </>
-          }
-          {references[typeName].types &&
-            <>
-              {references[typeName].types.map(typeName => {
-                const comment = typeName.split(' ').slice(1).join(' ');
-                const [namespace, name] = typeName.split(' ')[0].split('::')
-                return <CollapsingType key={`${namespace}::${name}`} header={comment} namespace={namespace} name={name} />;
-              })}
-            </>
-          }
-        </CollapsingDetails>
-      }
+      {references[typeName] && <References typeName={typeName} />}
     </>
   );
 }

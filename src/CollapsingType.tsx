@@ -1,8 +1,9 @@
 import { useCallback } from 'react';
-import { useSchema } from './SchemaContext';
+import { useSchema, useSchemaContext } from './SchemaContext';
 import Details from './Details';
 import CollapsingDetails from './CollapsingDetails';
 import Type from './Type';
+import References from './References';
 
 import { BaseType } from './metamodel';
 
@@ -14,6 +15,8 @@ type Props = {
 
 export default function CollapsingType({ header, namespace, name }: Props) {
   const schema = useSchema();
+  const { references } = useSchemaContext();
+  const typeName = `${namespace}::${name}`
 
   const renderType = useCallback(() => {
     for (const type of schema.types) {
@@ -22,10 +25,13 @@ export default function CollapsingType({ header, namespace, name }: Props) {
         return <Type type={bt} />;
       }
     }
+    if (references[typeName]) {
+      return <References typeName={typeName} />;
+    }
     return <Details value="No additional info" />
   }, [name, namespace, schema.types]);
 
   return (
-    <CollapsingDetails header={header} value=<code>{`${namespace}::${name}` }</code> cb={renderType} />
+    <CollapsingDetails header={header} value=<code>{typeName}</code> cb={renderType} />
   );
 }

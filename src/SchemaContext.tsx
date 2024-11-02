@@ -28,7 +28,10 @@ const crossReference = (schema: Model): Record<string, Record<string, string[]>>
     if (!('endpoints' in refs[typeName])) {
       refs[typeName].endpoints = [];
     }
-    refs[typeName].endpoints.push(`${source.name} ${comment}`);
+    const ref = `${source.name} ${comment}`
+    if (refs[typeName].endpoints.indexOf(ref) == -1) {
+      refs[typeName].endpoints.push(ref);
+    }
   }
 
   const addTypeReference = (source: TypeName, type: TypeName, comment: string) => {
@@ -39,7 +42,10 @@ const crossReference = (schema: Model): Record<string, Record<string, string[]>>
     if (refs[typeName].types === undefined) {
       refs[typeName].types = [];
     }
-    refs[typeName].types.push(`${source.namespace}::${source.name} ${comment}`);
+    const ref = `${source.namespace}::${source.name} ${comment}`;
+    if (refs[typeName].types.indexOf(ref) == -1) {
+      refs[typeName].types.push(ref);
+    }
   }
 
   const addValueOfReferences = (source: TypeName, valueOf: ValueOf, comment: string) => {
