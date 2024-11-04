@@ -1,4 +1,4 @@
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 import SchemaProvider from './SchemaContext';
 import SchemaView from './SchemaView';
@@ -6,11 +6,11 @@ import SchemaView from './SchemaView';
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <HashRouter>
         <SchemaProvider>
           <SchemaView />
         </SchemaProvider>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
