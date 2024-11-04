@@ -29,7 +29,7 @@ export default function NavBar() {
     <Navbar expand="lg" className="NavBar bg-body-tertiary fixed-top">
       <Navbar.Brand>
         <img
-          src="/logo-elastic-glyph-color.svg"
+          src="logo-elastic-glyph-color.svg"
           width="30"
           height="30"
           className="d-inline-block align-top"
