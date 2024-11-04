@@ -1,7 +1,5 @@
 import Details from './Details';
 import CollapsingDetails from './CollapsingDetails';
-import CollapsingEndpoint from './CollapsingEndpoint';
-import CollapsingType from './CollapsingType';
 import Description from './Description';
 import Deprecation from './Deprecation';
 import Interface from './Interface';

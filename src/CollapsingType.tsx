@@ -29,7 +29,7 @@ export default function CollapsingType({ header, namespace, name }: Props) {
       return <References typeName={typeName} />;
     }
     return <Details value="No additional info" />
-  }, [name, namespace, schema.types]);
+  }, [name, namespace, schema.types, references, typeName]);
 
   return (
     <CollapsingDetails header={header} value=<code>{typeName}</code> cb={renderType} />

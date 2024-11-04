@@ -29,7 +29,7 @@ const crossReference = (schema: Model): Record<string, Record<string, string[]>>
       refs[typeName].endpoints = [];
     }
     const ref = `${source.name} ${comment}`
-    if (refs[typeName].endpoints.indexOf(ref) == -1) {
+    if (refs[typeName].endpoints.indexOf(ref) === -1) {
       refs[typeName].endpoints.push(ref);
     }
   }
@@ -43,7 +43,7 @@ const crossReference = (schema: Model): Record<string, Record<string, string[]>>
       refs[typeName].types = [];
     }
     const ref = `${source.namespace}::${source.name} ${comment}`;
-    if (refs[typeName].types.indexOf(ref) == -1) {
+    if (refs[typeName].types.indexOf(ref) === -1) {
       refs[typeName].types.push(ref);
     }
   }
