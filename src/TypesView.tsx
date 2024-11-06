@@ -24,7 +24,7 @@ export default function TypesView() {
 
   const filteredTypes = schema.types.filter(type => {
     const bt = type as BaseType;
-    return `${bt.name.namespace}::${bt.name.name}`.match(search) != null;
+    return `${bt.name.namespace}::${bt.name.name}`.match(new RegExp(search, "i")) != null;
   });
 
   const selectedType = (!type) ? null : schema.types.filter(t => `${t.name.namespace}::${t.name.name}` === type)?.[0];

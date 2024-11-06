@@ -21,7 +21,7 @@ export default function EndpointsView() {
   };
 
   const filteredEndpoints = schema.endpoints.filter(endpoint => {
-    return endpoint.name.match(search) != null;
+    return endpoint.name.match(new RegExp(search, "i")) != null;
   });
 
   const selectedEndpoint = (!endpoint) ? null : schema.endpoints.filter(e => e.name === endpoint)?.[0];
