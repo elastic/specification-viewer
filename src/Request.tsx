@@ -5,6 +5,7 @@ import Properties from './Properties';
 import Body from './Body';
 import Behaviors from './Behaviors';
 import AttachedBehaviors from './AttachedBehaviors';
+import Examples from './Examples';
 
 import { Request as RequestType } from './metamodel';
 
@@ -28,6 +29,7 @@ export default function Request({ type }: Props) {
       <Body body={type.body} />
       {type.behaviors && <Behaviors behaviors={type.behaviors} />}
       {type.attachedBehaviors && <AttachedBehaviors behaviors={type.attachedBehaviors} />}
+      {type.examples && <Examples examples={type.examples} />}
     </>
   );
 }

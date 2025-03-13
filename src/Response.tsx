@@ -4,6 +4,7 @@ import Body from './Body';
 import Behaviors from './Behaviors';
 import Description from './Description';
 import AttachedBehaviors from './AttachedBehaviors';
+import Examples from './Examples';
 
 import { Response as ResponseType } from './metamodel';
 
@@ -34,6 +35,7 @@ export default function Response({ type }: Props) {
           ))}
         </CollapsingDetails>
       }
+      {type.examples && <Examples examples={type.examples} />}
     </>
   );
 }
