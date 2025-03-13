@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/specification-viewer/static/css/main.1af6f110.css",
-    "main.js": "/specification-viewer/static/js/main.70646b8e.js",
+    "main.js": "/specification-viewer/static/js/main.cf5b559b.js",
     "static/js/453.7ff4f8ae.chunk.js": "/specification-viewer/static/js/453.7ff4f8ae.chunk.js",
     "index.html": "/specification-viewer/index.html",
     "main.1af6f110.css.map": "/specification-viewer/static/css/main.1af6f110.css.map",
-    "main.70646b8e.js.map": "/specification-viewer/static/js/main.70646b8e.js.map",
+    "main.cf5b559b.js.map": "/specification-viewer/static/js/main.cf5b559b.js.map",
     "453.7ff4f8ae.chunk.js.map": "/specification-viewer/static/js/453.7ff4f8ae.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1af6f110.css",
-    "static/js/main.70646b8e.js"
+    "static/js/main.cf5b559b.js"
   ]
 }
